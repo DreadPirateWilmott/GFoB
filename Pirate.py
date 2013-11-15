@@ -13,7 +13,7 @@ import math
 def Main():
 	playerX = 1
 	playerZ = 1
-	playerY = 5
+	playerY = 1
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
