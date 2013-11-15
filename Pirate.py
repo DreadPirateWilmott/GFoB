@@ -17,7 +17,7 @@ def Main():
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
-		print "Current player position is %s X, %s Y, and %s Z" % (playerX, playerY, playerZ)
+		print "Current Pirate position is %s X, %s Y, and %s Z" % (playerX, playerY, playerZ)
 		instruction = str(raw_input(": ").lower())
 		if "move" in instruction: #Ex move.forward
 			#The player wishes to move in one of the four directions
@@ -48,11 +48,12 @@ def Main():
 				if compiledCo in blockList:
 					playerZ += 1
 					print "Blocked path"
-			elif moveDirection == "up": #To move upwards the block you wish to climb needs to be in front of you
+			elif moveDirection == "climb": #To move upwards the block you wish to climb needs to be in front of you
 				tempX = playerX + 1 #This is a temporary, unimportant value that is used for testing location conditions
 				tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
 				if(tempCompile in blockList):
 					playerY += 1
+					print "Climb succesful"
 				else:
 					print "Climb unsuccessful"
 				compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
@@ -66,6 +67,7 @@ def Main():
 			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 			while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
 				playerY -= 1
+				print "Pirate fell one space"
 				tempY = playerY - 1
 				tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
