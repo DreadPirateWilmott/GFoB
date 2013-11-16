@@ -14,6 +14,7 @@ def Main():
 	playerX = 1
 	playerZ = 1
 	playerY = 1
+	faceDir = 1 #The direction that you are facing; defaults to forward being + on the X
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
@@ -23,34 +24,121 @@ def Main():
 			#The player wishes to move in one of the four directions
 			moveList = instruction.split(".")
 			moveDirection = moveList[1]
-			#The move direction will determine which way the pirate moves
-			if moveDirection == "forward":
-				playerX += 1
-				compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-				if compiledCo in blockList:
-					playerX -= 1
-					print "Blocked path"
-			elif moveDirection == "back":
-				playerX -= 1
-				compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-				if compiledCo in blockList:
+			#The move direction will determine which way the pirate moves; the direction is relative to the direction
+			#that the pirate is facing.
+			if moveDirection == "forward": 
+				if faceDir == 1:
 					playerX += 1
-					print "Blocked path"
-			elif moveDirection == "right":
-				playerZ += 1
-				compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-				if compiledCo in blockList:
-					playerZ -= 1
-					print "Blocked path"
-			elif moveDirection == "left":
-				playerZ -= 1
-				compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-				if compiledCo in blockList:
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX -= 1
+						print "Blocked path"
+				elif faceDir == 2:
 					playerZ += 1
-					print "Blocked path"
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ -= 1
+						print "Blocked path"
+				elif faceDir == 3:
+					playerX -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX += 1
+						print "Blocked path"
+				elif faceDir == 4:
+					playerZ -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ += 1
+						print "Blocked path"
+			elif moveDirection == "back":
+				if faceDir == 1:
+					playerX -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX += 1
+						print "Blocked path"
+				elif faceDir == 2:
+					playerZ  -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ += 1
+						print "Blocked path"
+				elif faceDir == 3:
+					playerX += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX -= 1
+						print "Blocked path"
+				elif faceDir == 4:
+					playerZ += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ -= 1
+						print "Blocked path"
+			elif moveDirection == "right":
+				if faceDir == 1:
+					playerZ += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ -= 1
+						print "Blocked path"
+				elif faceDir == 2:
+					playerX -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX += 1
+						print "Blocked path"
+				elif faceDir == 3:
+					playerZ -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ += 1
+						print "Blocked path"
+				elif faceDir == 4:
+					playerX += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX -= 1
+						print "Blocked path"
+			elif moveDirection == "left":
+				if faceDir == 1:
+					playerZ -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ += 1
+						print "Blocked path"
+				elif faceDir == 2:
+					playerX += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX -= 1
+						print "Blocked path"
+				elif faceDir == 3:
+					playerZ += 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerZ -= 1
+						print "Blocked path"
+				elif faceDir == 4:
+					playerX -= 1
+					compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+					if compiledCo in blockList:
+						playerX += 1
+						print "Blocked path"
 			elif moveDirection == "climb": #To move upwards the block you wish to climb needs to be in front of you
-				tempX = playerX + 1 #This is a temporary, unimportant value that is used for testing location conditions
-				tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+				if faceDir == 1:
+					tempX = playerX + 1 #This is a temporary, unimportant value that is used for testing location conditions
+					tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+				elif faceDir == 2:
+					tempZ = playerZ + 1
+					tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+				elif faceDir == 3:
+					tempX = playerX - 1
+					tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+				elif faceDir == 4:
+					tempZ = playerZ - 1
+					tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
 				if(tempCompile in blockList):
 					playerY += 1
 					print "Climb succesful"
@@ -63,8 +151,25 @@ def Main():
 			#Moving down will be done automatically by the game
 			tempX = playerX + 1
 			tempY = playerY - 1
-			tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
-			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+			if faceDir == 1:
+				tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+			elif faceDir == 2:
+				tempZ = playerZ + 1
+				tempY = playerY - 1
+				tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+			elif faceDir == 3:
+				tempX = playerX - 1
+				tempY = playerY - 1
+				tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+			elif faceDir == 4:
+				tempZ = playerZ - 1
+				tempY = playerY - 1
+				tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+			#end if
 			while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
 				playerY -= 1
 				print "Pirate fell one space"
@@ -78,11 +183,22 @@ def Main():
 				playerX = 1
 				playerZ = 1
 				playerY = 1
+				faceDir = 1
 			#end if
 		#end if
 		elif "turn" in instruction: #Ex turn.right
 			#The player wishes to turn in one of the two directions
-			print "Work in progress"
+			#1 = X+, 2 = Z+, 3 = X-, 4 = Z-
+			directionList = instruction.split(".")
+			direction = directionList[1]
+			if direction == "right":
+				faceDir += 1
+				if faceDir == 5:
+					faceDir = 1
+			elif direction == "left":
+				faceDir -= 1
+				if faceDir == 0:
+					faceDir = 4
 		#end if
 		elif "place" in instruction: #Ex place.forward
 			#The player wishes to place an object in one of the four directions
@@ -90,17 +206,57 @@ def Main():
 			direction = placeList[1]
 			
 			if direction == "forward":
-				blockX = playerX + 1
-				compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				if faceDir == 1:
+					blockX = playerX + 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 2:
+					blockZ = playerZ + 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 3:
+					blockX = playerX - 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 4:
+					blockZ = playerZ - 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 			elif direction == "back":
-				blockX = playerX - 1
-				compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				if faceDir == 1:
+					blockX = playerX - 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 2:
+					blockZ = playerZ - 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 3:
+					blockX = playerX + 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 4:
+					blockZ = playerZ + 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 			elif direction == "left":
-				blockZ = playerZ - 1
-				compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				if faceDir == 1:
+					blockZ = playerZ - 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 2:
+					blockX = playerX + 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 3:
+					blockZ = playerZ + 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 4:
+					blockX = playerX - 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 			elif direction == "right":
-				blockZ = playerZ + 1
-				compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				if faceDir == 1:
+					blockZ = playerZ + 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 2:
+					blockX = playerX - 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 3:
+					blockZ = playerZ - 1
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 4:
+					blockX = playerX + 1
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 			elif direction == "up":
 				blockY = playerY + 1
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
