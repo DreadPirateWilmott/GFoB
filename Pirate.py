@@ -1,5 +1,5 @@
 #Created by DreadPirateWilmott on November 14th 2013
-#Current Version 0.0.1 - Please note that I do tend to comment alot on my code for future reference
+#Current Version 0.0.1 - Please note that I do tend to comment a lot on my code for future reference
 """The purpose of the main game is to give player control over an entity and have them fight with the
 enemy AI. The entire game will take place on a 100x100 square platform with each player only being able
 to move one space at a time. The main control functions of the game will include movement in 4 directions,
@@ -97,10 +97,16 @@ def Main():
 				compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 			elif direction == "left":
 				blockZ = playerZ - 1
-				compiledBlock = "%s.%s.%s" % (playerZ, playerY, blockZ)
+				compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 			elif direction == "right":
 				blockZ = playerZ + 1
-				compiledBlock = "%s.%s.%s" % (playerZ, playerY, blockZ)
+				compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+			elif direction == "up":
+				blockY = playerY + 1
+				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
+			elif direction == "down" and playerY > 1:
+				blockY = playerY - 1
+				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
 			#end if
 			
 			#Add compiledBlock to the total blocklist
@@ -114,22 +120,21 @@ def Main():
 			print "Work in progress"
 		#end if
 		elif instruction == "end.game":
-			#Prompt for save - not yet functional
-			savePrompt = str(raw_input("Would you like to save (Y or N): ").lower())
-			if savePrompt == 'n':
-				return
-			else:
-				Save(playerX, playerZ, blockList)
+			playerX = 1
+			playerY = 1
+			playerZ = 1
+			blockList = []
+			return
+		
+			#Open player info file
+			file = open("player.txt", "w")
+			compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+			file.write(compiledCo)
+			file.close()
 
-def Save(playerX, playerZ, blockList):
-    #Open player info file
-    file = open("player.txt", "w")
-    file.write(str(playerX) + "\n") #Newline will be stripped later
-    file.write(str(playerZ))
-    file.close()
-
-    #Open world info file
-    file = open("gameinfo.txt", "w")
-    file.write(str(blockList))
-    file.close()
+			#Open world info file
+			file = open("gameinfo.txt", "w")
+			file.write(str(blockList))
+			file.close()
+		#end if
 Main()
