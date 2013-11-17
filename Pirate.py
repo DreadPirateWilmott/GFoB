@@ -204,64 +204,70 @@ def Main():
 			#The player wishes to place an object in one of the four directions
 			placeList = instruction.split(".")
 			direction = placeList[1]
+			placeDis = int(placeList[2])
+			
+			#Make sure the place distance doesn't exceed 4
+			if placeDis > 4:
+				placeDis = 4
+				print "Distance too great, block will be placed 4 blocks away"
 			
 			if direction == "forward":
 				if faceDir == 1:
-					blockX = playerX + 1
+					blockX = playerX + placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 2:
-					blockZ = playerZ + 1
+					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 3:
-					blockX = playerX - 1
+					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 4:
-					blockZ = playerZ - 1
+					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 			elif direction == "back":
 				if faceDir == 1:
-					blockX = playerX - 1
+					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 2:
-					blockZ = playerZ - 1
+					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 3:
-					blockX = playerX + 1
+					blockX = playerX + placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 4:
-					blockZ = playerZ + 1
+					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 			elif direction == "left":
 				if faceDir == 1:
-					blockZ = playerZ - 1
+					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 2:
-					blockX = playerX + 1
+					blockX = playerX + placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 3:
-					blockZ = playerZ + 1
+					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 4:
-					blockX = playerX - 1
+					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 			elif direction == "right":
 				if faceDir == 1:
-					blockZ = playerZ + 1
+					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 2:
-					blockX = playerX - 1
+					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 				elif faceDir == 3:
-					blockZ = playerZ - 1
+					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
 				elif faceDir == 4:
-					blockX = playerX + 1
+					blockX = playerX + placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
 			elif direction == "up":
-				blockY = playerY + 1
+				blockY = playerY + placeDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
 			elif direction == "down" and playerY > 1:
-				blockY = playerY - 1
+				blockY = playerY - placeDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
 			#end if
 			
