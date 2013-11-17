@@ -14,3 +14,28 @@ New as of 11/16/2013
 Alot of the movement functionality has been added though the AI has not been added at all. Most recent is the ability to
 turn and climb. The climbing ability to is activated if there is a block infront of you, and you will not fall as long as long
 as their is a block forward and down one block, or below you.
+
+Commands
+========
+Primary command = move
+
+Seconday commands = .forward
+                  = .back
+                  = .left
+                  = .right
+                  
+++++++++++++++++++++++++    
+Primary command = place
+
+Secondary commands = .forward
+                   = .back
+                   = .left
+                   = .right
+  
+Tertiary command = .(distance), this can be up to four blocks
+
+++++++++++++++++++++++++
+Primary command = turn
+
+Secondary command = .right
+                  = .left
