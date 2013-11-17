@@ -8,3 +8,9 @@ final version before the AI will begin being developed.
 Please note that I am new to python, and programming in general, I am young and prone to mistakes which I hope you will forgive.
 
 Part of this project is to see how many consecutive days I can contribute to the project with my goal being one month. 
+
+New as of 11/16/2013
+====================
+Alot of the movement functionality has been added though the AI has not been added at all. Most recent is the ability to
+turn and climb. The climbing ability to is activated if there is a block infront of you, and you will not fall as long as long
+as their is a block forward and down one block, or below you.
