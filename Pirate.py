@@ -209,7 +209,7 @@ def Main():
 			#Make sure the place distance doesn't exceed 4
 			if placeDis > 4:
 				placeDis = 4
-				print "Distance too great, block will be placed 4 blocks away"
+				print "Distance too great, block will be placed 4 blocks away."
 			
 			if direction == "forward":
 				if faceDir == 1:
@@ -277,6 +277,84 @@ def Main():
 			else:
 				print "Block already in that location"
 		#end if
+		elif "mine" in instruction:
+			mineList = instruction.split(".")
+			direction = mineList[1]
+			mineDis = int(mineList[2])
+			
+			#If the mining distance is greater than 4 than reduce the distance to 4
+			if mineDis > 4:
+				mineDis = 4
+				print "Too far away, block will be mined 4 blocks away."
+				
+			#Determine the direction and facing direction in an attempt to remove the block
+			if direction == "forward":
+				if faceDir == 1:
+					blockX = playerX + mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 2:
+					blockZ = playerZ + mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 3:
+					blockX = playerX - mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 4:
+					blockZ = playerZ - mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+			elif direction == "back":
+				if faceDir == 1:
+					blockX = playerX - mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 2:
+					blockZ = playerZ - mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 3:
+					blockX = playerX + mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 4:
+					blockZ = playerZ + mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+			elif direction == "left":
+				if faceDir == 1:
+					blockZ = playerZ - mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 2:
+					blockX = playerX + mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 3:
+					blockZ = playerZ + mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 4:
+					blockX = playerX - mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+			elif direction == "right":
+				if faceDir == 1:
+					blockZ = playerZ + mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 2:
+					blockX = playerX - mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+				elif faceDir == 3:
+					blockZ = playerZ - mineDis
+					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
+				elif faceDir == 4:
+					blockX = playerX + mineDis
+					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
+			elif direction == "up":
+				blockY = playerY + mineDis
+				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
+			elif direction == "down" and playerY > 1:
+				blockY = playerY - mineDis
+				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
+			#end if
+			
+			#Remove the block
+			if compiledBlock in blockList:
+				blockList.remove(compiledBlock)
+				print "Block mined"
+			else:
+				print "No block to mine"
+			#end if
 		elif instruction == "shoot": #Ex shoot
 			#The player wishes to shoot forward
 			print "Work in progress"
