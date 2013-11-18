@@ -13,3 +13,5 @@ November 17th 2013
 -Added the ability to dig up blocks up to four blocks away, this is done to directly oppose the placing ability. Now you
 -are able to place and dig blocks. This contributes to the ability to build fortresses and to infiltrate them in interesting
 -ways.
+November 18th 2013
+-Fixing bugs, and making slight changes to make the program easier to use. Wiki is on the way.
