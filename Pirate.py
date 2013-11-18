@@ -1,4 +1,7 @@
 #Created by DreadPirateWilmott on November 14th 2013
+#Last edited on the 17th
+#Feel free to make edits and make this program your own, I only ask that you keep the DreadPirateWilmott name
+#on the top of the program.
 #Current Version 0.0.1 - Please note that I do tend to comment a lot on my code for future reference
 """The purpose of the main game is to give player control over an entity and have them fight with the
 enemy AI. The entire game will take place on a 100x100 square platform with each player only being able

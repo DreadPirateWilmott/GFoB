@@ -31,7 +31,9 @@ Secondary commands = .forward
                    = .back
                    = .left
                    = .right
-  
+				   = .up
+				   = .down
+				   
 Tertiary command = .(distance), this can be up to four blocks
 
 ++++++++++++++++++++++++
@@ -39,3 +41,15 @@ Primary command = turn
 
 Secondary command = .right
                   = .left
+
+++++++++++++++++++++++++
+Primary command = dig
+
+Secondary command = .forward
+							= .back
+							= .right
+							= .left
+							= .up
+							= .down
+							
+Tertiary command = .(distance), this can be up to four blocks
