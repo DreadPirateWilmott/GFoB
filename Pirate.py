@@ -21,7 +21,7 @@ def Main():
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
-		print "Current Pirate position is %s X, %s Y, and %s Z" % (playerX, playerY, playerZ)
+		print "Current Player position is %s X, %s Y, and %s Z" % (playerX, playerY, playerZ)
 		instruction = str(raw_input(": ").lower())
 		if "move" in instruction: #Ex move.forward
 			#The player wishes to move in one of the four directions
@@ -207,7 +207,11 @@ def Main():
 			#The player wishes to place an object in one of the four directions
 			placeList = instruction.split(".")
 			direction = placeList[1]
-			placeDis = int(placeList[2])
+			
+			if len(placeList) == 3:
+				placeDis = int(placeList[2])
+			else:
+				placeDis = 1
 			
 			#Make sure the place distance doesn't exceed 4
 			if placeDis > 4:
@@ -283,8 +287,10 @@ def Main():
 		elif "mine" in instruction:
 			mineList = instruction.split(".")
 			direction = mineList[1]
-			mineDis = int(mineList[2])
-			
+			if len(mineList) == 3:
+				mineDis = int(mineList[2])
+			else:
+				mineDis = 1
 			#If the mining distance is greater than 4 than reduce the distance to 4
 			if mineDis > 4:
 				mineDis = 4
@@ -357,6 +363,14 @@ def Main():
 				print "Block mined"
 			else:
 				print "No block to mine"
+			#end if
+			
+			if direction == "down" and playerY > 1:
+				tempY = playerY - 1
+				compiledCo = "%s.%s.%s" % (playerX, tempY, playerZ)
+				while compiledCo not in blockList and playerY > 1:
+					playerY -= 1
+				#end while
 			#end if
 		elif instruction == "shoot": #Ex shoot
 			#The player wishes to shoot forward
