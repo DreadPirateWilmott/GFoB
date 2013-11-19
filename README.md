@@ -53,3 +53,9 @@ Secondary command = .forward
 							= .down
 							
 Tertiary command = .(distance), this can be up to four blocks
+
+++++++++++++++++++++++++
+Primary command = shoot
+
+#There are no secondary commands, the command makes you shoot forward, where you aim depends on the direction
+#you are facing.
