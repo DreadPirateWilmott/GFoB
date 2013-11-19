@@ -4,7 +4,7 @@
 #on the top of the program.
 #Current Version 0.0.1 - Please note that I do tend to comment a lot on my code for future reference
 """The purpose of the main game is to give player control over an entity and have them fight with the
-enemy AI. The entire game will take place on a 100x100 square platform with each player only being able
+enemy AI. The entire game will take place on a 20x20 square platform with each player only being able
 to move one space at a time. The main control functions of the game will include movement in 4 directions,
 the ability to turn, the ability to shoot, and the ability to place an object to block shots. The controllable
 character will be referred to as a pirate in the code, and the AI opponent will be referred to as a Knight."""
@@ -181,7 +181,7 @@ def Main():
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 			#end if
 			#If the player moves off of the platform then reset their position
-			if playerX > 100 or playerX < 1 or playerZ > 100 or playerZ < 1:
+			if playerX > 20 or playerX < 1 or playerZ > 20 or playerZ < 1:
 				print "Player position reset"
 				playerX = 1
 				playerZ = 1
@@ -373,25 +373,37 @@ def Main():
 				#end while
 			#end if
 		elif instruction == "shoot": #Ex shoot
-			#The player wishes to shoot forward
-			print "Work in progress"
+			#The player wishes to shoot
+			if faceDir == 1:
+				for i in range(1, 21):
+					tempX = playerX + i
+					compiledValue = "%s.%s.%s" % (tempX, playerY, playerZ)
+					if compiledValue in blockList:
+						print "Blocked by object"
+						break
+			elif faceDir == 2:
+				for i in range(1, 21):
+					tempZ = playerZ + i
+					compiledValue = "%s.%s.%s" % (playerX, playerY, tempZ)
+					if compiledValue in blockList: 
+						print "Blocked by object"
+						break
+			elif faceDir == 3:
+				for i in range(1, 21):
+					tempX = playerX - i
+					compiledValue = "%s.%s.%s" % (tempX, playerY, playerZ)
+					if compiledValue in blockList:
+						print "Blocked by object"
+						break
+			elif faceDir == 4:
+				for i in range(1, 21):
+					tempZ = playerZ - i
+					compiledValue = "%s.%s.%s" % (playerX, playerY, tempZ)
+					if compiledValue in blockList:
+						print "Blocked by object"
+						break
+			#end if
 		#end if
 		elif instruction == "end.game":
-			playerX = 1
-			playerY = 1
-			playerZ = 1
-			blockList = []
 			return
-		
-			#Open player info file
-			file = open("player.txt", "w")
-			compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-			file.write(compiledCo)
-			file.close()
-
-			#Open world info file
-			file = open("gameinfo.txt", "w")
-			file.write(str(blockList))
-			file.close()
-		#end if
 Main()
