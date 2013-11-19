@@ -14,6 +14,7 @@ import random
 import math
 
 def Main():
+	charN = str(raw_input("Enter character name: "))
 	playerX = 1
 	playerZ = 1
 	playerY = 1
@@ -21,11 +22,11 @@ def Main():
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
-		print "Current Player position is %s X, %s Y, and %s Z" % (playerX, playerY, playerZ)
+		print "%s's current position is %s X, %s Y, and %s Z" % (charN, playerX, playerY, playerZ)
 		instruction = str(raw_input(": ").lower())
 		if "move" in instruction: #Ex move.forward
 			#The player wishes to move in one of the four directions
-			moveList = instruction.split(".")
+			moveList = instruction.split(" ")
 			moveDirection = moveList[1]
 			#The move direction will determine which way the pirate moves; the direction is relative to the direction
 			#that the pirate is facing.
@@ -175,7 +176,7 @@ def Main():
 			#end if
 			while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
 				playerY -= 1
-				print "Pirate fell one space"
+				print "%s fell one space" % (charN)
 				tempY = playerY - 1
 				tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
@@ -192,7 +193,7 @@ def Main():
 		elif "turn" in instruction: #Ex turn.right
 			#The player wishes to turn in one of the two directions
 			#1 = X+, 2 = Z+, 3 = X-, 4 = Z-
-			directionList = instruction.split(".")
+			directionList = instruction.split(" ")
 			direction = directionList[1]
 			if direction == "right":
 				faceDir += 1
@@ -205,7 +206,7 @@ def Main():
 		#end if
 		elif "place" in instruction: #Ex place.forward
 			#The player wishes to place an object in one of the four directions
-			placeList = instruction.split(".")
+			placeList = instruction.split(" ")
 			direction = placeList[1]
 			
 			if len(placeList) == 3:
@@ -285,7 +286,7 @@ def Main():
 				print "Block already in that location"
 		#end if
 		elif "mine" in instruction:
-			mineList = instruction.split(".")
+			mineList = instruction.split(" ")
 			direction = mineList[1]
 			if len(mineList) == 3:
 				mineDis = int(mineList[2])
