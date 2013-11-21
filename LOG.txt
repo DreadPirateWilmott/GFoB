@@ -17,3 +17,6 @@ November 18th 2013
 -Fixing bugs, and making slight changes to make the program easier to use. Wiki is on the way.
 November 19th 2013
 -Added the ability to shoot, Wiki will be worked on tomorrow
+November 20th 2013
+-Added a warning system when you are around blocks, it will tell you when you are close to other blocks so you don't
+-waste a turn.
