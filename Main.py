@@ -23,6 +23,79 @@ def Main():
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 	while True: #Loop forever, there will be a command to end the game
 		print "%s's current position is %s X, %s Y, and %s Z" % (charN, playerX, playerY, playerZ)
+		if faceDir == 1:
+			tempX = playerX + 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block forward"
+			tempZ = playerZ + 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block right"
+			tempX = playerX - 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block back"
+			tempZ = playerZ - 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block left"
+			#end if
+		elif faceDir == 2:
+			tempZ = playerZ + 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block forward"
+			tempX = playerX - 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block right"
+			tempZ = playerZ - 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block back"
+			tempX = playerX + 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block left"
+			#end if
+		elif faceDir == 3:
+			tempX = playerX - 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block forward"
+			tempZ = playerZ - 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block right"
+			tempX = playerX + 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block back"
+			tempZ = playerZ + 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block left"
+			#end if
+		elif faceDir == 4:
+			tempZ = playerZ - 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block forward"
+			tempX = playerX + 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block right"
+			tempZ = playerZ + 1
+			tempCompile = "%s.%s.%s" % (playerX, playerY, tempZ)
+			if tempCompile in blockList:
+				print "Block back"
+			tempX = playerX - 1
+			tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
+			if tempCompile in blockList:
+				print "Block left"
+			#end if
+		#end if
 		instruction = str(raw_input(": ").lower())
 		if "move" in instruction: #Ex move.forward
 			#The player wishes to move in one of the four directions
