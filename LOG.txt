@@ -20,3 +20,6 @@ November 19th 2013
 November 20th 2013
 -Added a warning system when you are around blocks, it will tell you when you are close to other blocks so you don't
 -waste a turn.
+November 26th 2013
+-Since I've last input into this log the project name has been changed into Goblins: Fortress of Blood. I think that it 
+-is a much more interesting title to the game. I also added a main menu and the ability to choose your characters name.
