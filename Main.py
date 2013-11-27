@@ -1,10 +1,11 @@
 #Created by DreadPirateWilmott on November 14th 2013
-#Last edited on the 17th
+#Last edited on the 24th
 #Feel free to make edits and make this program your own, I only ask that you keep the DreadPirateWilmott name
 #on the top of the program.
-#Current Version 0.0.1 - Please note that I do tend to comment a lot on my code for future reference
-"""The purpose of the main game is to give player control over an entity and have them fight with the
-enemy AI. The entire game will take place on a 20x20 square platform with each player only being able
+#Current Version 0.0.2 - Please note that I do tend to comment a lot on my code for future reference
+"""The purpose of the main game is to give player control over an entity and have them control that entity.
+One of the main purposes of the game is building a fortress and defending against enemy invasions. The main 
+challenge comes from the fact that it is a text game. The entire game will take place on a 20x20 square platform with each player only being able
 to move one space at a time. The main control functions of the game will include movement in 4 directions,
 the ability to turn, the ability to shoot, and the ability to place an object to block shots. The controllable
 character will be referred to as a pirate in the code, and the AI opponent will be referred to as a Knight."""
@@ -13,7 +14,36 @@ import time
 import random
 import math
 
-def Main():
+def Menu():
+	print "Start"
+	print "Tutorial"
+	print "Controls"
+	cMenu = str(raw_input(": ").lower())
+	
+	if cMenu == "start":
+		GFoB()
+	elif cMenu == "tutorial":
+		Tutorial()
+	elif cMenu == "controls":
+		ControlPrint()
+	#end if
+
+def ControlPrint():
+	print "To understand the controls you need to understand how I refer to commands. There are three types: primary, secondary, tertiary."
+	print "Primary commands are the first word and the identifier. Secondary commands are generally directions. Tertiary commands are only used for distance."
+	print "In the game there are currently 5 commands that need to be listed: move, place, turn, mine, and shoot."
+	print "Move - Primary command, Forward, Back, Left, Right - Secondary command, No tertiary command."
+	print "Place - Primary command, Forward, Back, Left, Right - Secondary command, Tertiary command is distance (up to four spaces)."
+	print "Mine - Primary command, Forward, Back, Left, Right - Secondary command, Tertiary command is distance (up to four spaces)."
+	print "Turn - Primary command, Right, Left - Secondary command, No tertiary command."
+	Menu()
+	
+def Tutorial():
+	print "The purpose of the game is to build, manage, and succesfully defend a fortress."
+	print "See the controls menu located in the main menu for more information on key bindings."
+	Menu()
+	
+def GFoB():
 	charN = str(raw_input("Enter character name: "))
 	playerX = 1
 	playerZ = 1
@@ -481,4 +511,8 @@ def Main():
 		elif instruction == "end.game":
 			return
 		
-Main()
+def NPC():
+	#This is the computer player in GFoB
+	print "Not functional"
+
+Menu()
