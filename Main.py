@@ -39,7 +39,7 @@ def ControlPrint():
 	Menu()
 	
 def Tutorial():
-	print "The purpose of the game is to build, manage, and succesfully defend a fortress."
+	print "The purpose of the game is to build, manage, and successfully defend a fortress."
 	print "See the controls menu located in the main menu for more information on key bindings."
 	Menu()
 	
@@ -51,6 +51,7 @@ def GFoB():
 	faceDir = 1 #The direction that you are facing; defaults to forward being + on the X
 	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
 	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
+	emptyList = [] #A list that stores values such as the co-ordinates for the crefor block
 	while True: #Loop forever, there will be a command to end the game
 		print "%s's current position is %s X, %s Y, and %s Z" % (charN, playerX, playerY, playerZ)
 		if faceDir == 1:
@@ -285,6 +286,8 @@ def GFoB():
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 			#end if
 			#If the player moves off of the platform then reset their position
+			if playerX > forXplusBound or playerX < forXminusBound or playerZ > forZplusBound or playerZ < forZminusBound:
+				print charN + " has travelled out of the fortress."
 			if playerX > 20 or playerX < 1 or playerZ > 20 or playerZ < 1:
 				print "Player position reset"
 				playerX = 1
@@ -313,7 +316,20 @@ def GFoB():
 			direction = placeList[1]
 			
 			if len(placeList) == 3:
-				placeDis = int(placeList[2])
+				placeDis = str(placeList[2])
+				if placeDis == "crefor" and len(emptyList) == 0:
+					placeDis = 1
+					emptyListTrig = True
+					
+					#Determine the boundaries for the fortress
+					forXplusBound = playerX + int(raw_input("X Positive boundary distance: "))
+					forXminusBound = playerX - int(raw_input("X Negative boundary distance: "))
+					forZplusBound = playerZ + int(raw_input("Z Positive boundary distance: "))
+					forZminusBound = playerZ - int(raw_input("Z Negative boundary distance: "))
+				
+				else:
+					placeDis = int(placeDis)
+					emptyListTrig = False
 			else:
 				placeDis = 1
 			
@@ -321,7 +337,7 @@ def GFoB():
 			if placeDis > 4:
 				placeDis = 4
 				print "Distance too great, block will be placed 4 blocks away."
-			
+				
 			if direction == "forward":
 				if faceDir == 1:
 					blockX = playerX + placeDis
@@ -383,6 +399,8 @@ def GFoB():
 			#end if
 			
 			#Add compiledBlock to the total blocklist
+			if emptyListTrig == True:
+				emptyList.append(compiledBlock)
 			if compiledBlock not in blockList:
 				blockList.append(compiledBlock)
 			else:

@@ -23,3 +23,8 @@ November 20th 2013
 November 26th 2013
 -Since I've last input into this log the project name has been changed into Goblins: Fortress of Blood. I think that it 
 -is a much more interesting title to the game. I also added a main menu and the ability to choose your characters name.
+November 27th 2013
+-Huge idea day! Today I added the ability to place a block that lets you set the parameters for the size of your fortress.
+-In this area you will be safe from being killed by roaming / raiding parties of dwarves. Tomorrow will be a huge leap forward
+-in terms of mining. Inventory systems will be going up in the near futured as well as the ability to mine, smelt, and use
+-ores / resources.
