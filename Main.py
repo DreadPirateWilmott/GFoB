@@ -286,8 +286,9 @@ def GFoB():
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 			#end if
 			#If the player moves off of the platform then reset their position
-			if playerX > forXplusBound or playerX < forXminusBound or playerZ > forZplusBound or playerZ < forZminusBound:
-				print charN + " has travelled out of the fortress."
+			if len(emptyList) > 0:
+				if playerX > forXplusBound or playerX < forXminusBound or playerZ > forZplusBound or playerZ < forZminusBound:
+					print charN + " has travelled out of the fortress."
 			if playerX > 20 or playerX < 1 or playerZ > 20 or playerZ < 1:
 				print "Player position reset"
 				playerX = 1
@@ -332,7 +333,7 @@ def GFoB():
 					emptyListTrig = False
 			else:
 				placeDis = 1
-			
+				emptyListTrig = False
 			#Make sure the place distance doesn't exceed 4
 			if placeDis > 4:
 				placeDis = 4
