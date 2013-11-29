@@ -2,26 +2,34 @@
 #Last edited on the 24th
 #Feel free to make edits and make this program your own, I only ask that you keep the DreadPirateWilmott name
 #on the top of the program.
-#Current Version 0.0.2 - Please note that I do tend to comment a lot on my code for future reference
-"""The purpose of the main game is to give player control over an entity and have them control that entity.
-One of the main purposes of the game is building a fortress and defending against enemy invasions. The main 
-challenge comes from the fact that it is a text game. The entire game will take place on a 20x20 square platform with each player only being able
-to move one space at a time. The main control functions of the game will include movement in 4 directions,
-the ability to turn, the ability to shoot, and the ability to place an object to block shots. The controllable
-character will be referred to as a pirate in the code, and the AI opponent will be referred to as a Knight."""
+
+
+#Current Version 0.0.3 - 2 hours 40 minutes of recorded time
+
 #import essential files
 import time
 import random
 import math
 
+def genW():
+	print "Generating world..."
+	blockList = []
+	for x in range(1, 21):
+		for z in range(1, 21):
+			for y in range(1, 21):
+				compile = "%s.%s.%s" % (x, y, z)
+				blockList.append(compile)
+	return blockList
+	
 def Menu():
-	print "Start"
+	print "[Start] New Game"
+	print "[Load] Game"
 	print "Tutorial"
 	print "Controls"
 	cMenu = str(raw_input(": ").lower())
 	
-	if cMenu == "start":
-		GFoB()
+	if cMenu == "start" or cMenu == "load":
+		GFoB(cMenu)
 	elif cMenu == "tutorial":
 		Tutorial()
 	elif cMenu == "controls":
@@ -43,15 +51,24 @@ def Tutorial():
 	print "See the controls menu located in the main menu for more information on key bindings."
 	Menu()
 	
-def GFoB():
-	charN = str(raw_input("Enter character name: "))
-	playerX = 1
-	playerZ = 1
-	playerY = 1
-	faceDir = 1 #The direction that you are facing; defaults to forward being + on the X
-	compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
-	blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
-	emptyList = [] #A list that stores values such as the co-ordinates for the crefor block
+def GFoB(cMenu):
+	if cMenu == "start":
+		charN = str(raw_input("Enter character name: "))
+		playerX = 1
+		playerZ = 1
+		playerY = 21
+		faceDir = 1 #The direction that you are facing; defaults to forward being + on the X
+		compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
+		blockList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
+		inventory = [] #This is the inventory of the player
+		emptyList = [] #This list contains unimportant information
+		
+		#Adding to blocklist
+		generation = genW()
+		blockList = blockList + generation
+	elif cMenu == "load":
+		#Load game
+		print "WIP"
 	while True: #Loop forever, there will be a command to end the game
 		print "%s's current position is %s X, %s Y, and %s Z" % (charN, playerX, playerY, playerZ)
 		if faceDir == 1:
@@ -284,16 +301,20 @@ def GFoB():
 				tempY = playerY - 1
 				tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			#end if
+			#end while
 			#If the player moves off of the platform then reset their position
+<<<<<<< HEAD
+			if emptyList == 1:
+=======
 			if len(emptyList) > 0:
+>>>>>>> 56d0f9daabab1f8a12d2160328cd21caa80317d6
 				if playerX > forXplusBound or playerX < forXminusBound or playerZ > forZplusBound or playerZ < forZminusBound:
 					print charN + " has travelled out of the fortress."
 			if playerX > 20 or playerX < 1 or playerZ > 20 or playerZ < 1:
 				print "Player position reset"
 				playerX = 1
 				playerZ = 1
-				playerY = 1
+				playerY = 21
 				faceDir = 1
 			#end if
 		#end if
@@ -316,21 +337,20 @@ def GFoB():
 			placeList = instruction.split(" ")
 			direction = placeList[1]
 			
-			if len(placeList) == 3:
-				placeDis = str(placeList[2])
-				if placeDis == "crefor" and len(emptyList) == 0:
-					placeDis = 1
-					emptyListTrig = True
-					
-					#Determine the boundaries for the fortress
-					forXplusBound = playerX + int(raw_input("X Positive boundary distance: "))
-					forXminusBound = playerX - int(raw_input("X Negative boundary distance: "))
-					forZplusBound = playerZ + int(raw_input("Z Positive boundary distance: "))
-					forZminusBound = playerZ - int(raw_input("Z Negative boundary distance: "))
+			if direction == "crefor" and len(emptyList) == 0:
+				placeDis = 1
+				emptyListTrig = True
 				
-				else:
-					placeDis = int(placeDis)
-					emptyListTrig = False
+				#Determine the boundaries for the fortress
+				forXplusBound = playerX + int(raw_input("X Positive boundary distance: "))
+				forXminusBound = playerX - int(raw_input("X Negative boundary distance: "))
+				forZplusBound = playerZ + int(raw_input("Z Positive boundary distance: "))
+				forZminusBound = playerZ - int(raw_input("Z Negative boundary distance: "))
+
+			else:
+				emptyListTrig = False
+			if len(placeList) == 3:
+				placeDis = int(placeList[2])
 			else:
 				placeDis = 1
 				emptyListTrig = False
@@ -401,11 +421,12 @@ def GFoB():
 			
 			#Add compiledBlock to the total blocklist
 			if emptyListTrig == True:
-				emptyList.append(compiledBlock)
-			if compiledBlock not in blockList:
-				blockList.append(compiledBlock)
+				emptyList.append("true")
 			else:
-				print "Block already in that location"
+				if compiledBlock not in blockList:
+					blockList.append(compiledBlock)
+				else:
+					print "Block already in that location"
 		#end if
 		elif "mine" in instruction:
 			mineList = instruction.split(" ")
@@ -489,10 +510,34 @@ def GFoB():
 			#end if
 			
 			if direction == "down" and playerY > 1:
+				#Moving down will be done automatically by the game
+				tempX = playerX + 1
 				tempY = playerY - 1
-				compiledCo = "%s.%s.%s" % (playerX, tempY, playerZ)
-				while compiledCo not in blockList and playerY > 1:
+				if faceDir == 1:
+					tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+				elif faceDir == 2:
+					tempZ = playerZ + 1
+					tempY = playerY - 1
+					tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+				elif faceDir == 3:
+					tempX = playerX - 1
+					tempY = playerY - 1
+					tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+				elif faceDir == 4:
+					tempZ = playerZ - 1
+					tempY = playerY - 1
+					tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+				#end if
+				while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
 					playerY -= 1
+					print "%s fell one space" % (charN)
+					tempY = playerY - 1
+					tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
+					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 				#end while
 			#end if
 		elif instruction == "shoot": #Ex shoot

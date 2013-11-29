@@ -28,3 +28,6 @@ November 27th 2013
 -In this area you will be safe from being killed by roaming / raiding parties of dwarves. Tomorrow will be a huge leap forward
 -in terms of mining. Inventory systems will be going up in the near futured as well as the ability to mine, smelt, and use
 -ores / resources.
+November 28th 2013
+-I added more layers to the world to start building on mining. I also began adding a system for saving the game, and I 
+-also finally figured out how the inventory system will work.
