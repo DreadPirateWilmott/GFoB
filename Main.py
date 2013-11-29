@@ -4,7 +4,7 @@
 #on the top of the program.
 
 
-#Current Version 0.0.3 - 2 hours 40 minutes of recorded time
+#Current Version 0.0.3 - 2 hours 50 minutes of recorded time
 
 #import essential files
 import time
@@ -303,11 +303,8 @@ def GFoB(cMenu):
 				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
 			#end while
 			#If the player moves off of the platform then reset their position
-<<<<<<< HEAD
-			if emptyList == 1:
-=======
+
 			if len(emptyList) > 0:
->>>>>>> 56d0f9daabab1f8a12d2160328cd21caa80317d6
 				if playerX > forXplusBound or playerX < forXminusBound or playerZ > forZplusBound or playerZ < forZminusBound:
 					print charN + " has travelled out of the fortress."
 			if playerX > 20 or playerX < 1 or playerZ > 20 or playerZ < 1:
