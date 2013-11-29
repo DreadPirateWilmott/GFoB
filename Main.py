@@ -4,7 +4,7 @@
 #on the top of the program.
 
 
-#Current Version 0.0.3 - 2 hours 50 minutes of recorded time
+#Current Version 0.0.3 - 2 hours 55 minutes of recorded time
 
 #import essential files
 import time
@@ -70,6 +70,37 @@ def GFoB(cMenu):
 		#Load game
 		print "WIP"
 	while True: #Loop forever, there will be a command to end the game
+		#Moving down will be done automatically by the game
+		tempX = playerX + 1
+		tempY = playerY - 1
+		if faceDir == 1:
+			tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+		elif faceDir == 2:
+			tempZ = playerZ + 1
+			tempY = playerY - 1
+			tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+		elif faceDir == 3:
+			tempX = playerX - 1
+			tempY = playerY - 1
+			tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
+			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+		elif faceDir == 4:
+			tempZ = playerZ - 1
+			tempY = playerY - 1
+			tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
+			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+		#end if
+		droppS = 0 # dropped spaces
+		while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
+			playerY -= 1
+			droppS += 1
+			print charN + " fell %s space(s)" % (droppS)
+			tempY = playerY - 1
+			tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
+			tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
+		#end while
 		print "%s's current position is %s X, %s Y, and %s Z" % (charN, playerX, playerY, playerZ)
 		if faceDir == 1:
 			tempX = playerX + 1
@@ -273,35 +304,6 @@ def GFoB(cMenu):
 				if compiledCo in blockList:
 					playerY -= 1
 					print "Blocked path"
-			#Moving down will be done automatically by the game
-			tempX = playerX + 1
-			tempY = playerY - 1
-			if faceDir == 1:
-				tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
-				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			elif faceDir == 2:
-				tempZ = playerZ + 1
-				tempY = playerY - 1
-				tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
-				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			elif faceDir == 3:
-				tempX = playerX - 1
-				tempY = playerY - 1
-				tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
-				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			elif faceDir == 4:
-				tempZ = playerZ - 1
-				tempY = playerY - 1
-				tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
-				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			#end if
-			while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
-				playerY -= 1
-				print "%s fell one space" % (charN)
-				tempY = playerY - 1
-				tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
-				tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-			#end while
 			#If the player moves off of the platform then reset their position
 
 			if len(emptyList) > 0:
@@ -506,37 +508,6 @@ def GFoB(cMenu):
 				print "No block to mine"
 			#end if
 			
-			if direction == "down" and playerY > 1:
-				#Moving down will be done automatically by the game
-				tempX = playerX + 1
-				tempY = playerY - 1
-				if faceDir == 1:
-					tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
-					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-				elif faceDir == 2:
-					tempZ = playerZ + 1
-					tempY = playerY - 1
-					tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
-					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-				elif faceDir == 3:
-					tempX = playerX - 1
-					tempY = playerY - 1
-					tempCompile = "%s.%s.%s" % (tempX, tempY, playerZ)
-					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-				elif faceDir == 4:
-					tempZ = playerZ - 1
-					tempY = playerY - 1
-					tempCompile = "%s.%s.%s" % (playerX, tempY, tempZ)
-					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-				#end if
-				while tempCompile not in blockList and tempCompile2 not in blockList and playerY > 1:
-					playerY -= 1
-					print "%s fell one space" % (charN)
-					tempY = playerY - 1
-					tempCompile = "%s.%s.%s"  % (tempX, tempY, playerZ)
-					tempCompile2 = "%s.%s.%s" % (playerX, tempY, playerZ)
-				#end while
-			#end if
 		elif instruction == "shoot": #Ex shoot
 			#The player wishes to shoot
 			if faceDir == 1:
