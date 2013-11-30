@@ -1,10 +1,10 @@
 #Created by DreadPirateWilmott on November 14th 2013
-#Last edited on the 24th
+#Last edited on the 30th
 #Feel free to make edits and make this program your own, I only ask that you keep the DreadPirateWilmott name
 #on the top of the program.
 
 
-#Current Version 0.0.3 - 6 hours 45 minutes of recorded time
+#Current Version 0.0.3 - 8 hours 15 minutes of recorded time
 
 #import essential files
 import time
