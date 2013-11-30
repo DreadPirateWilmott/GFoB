@@ -32,5 +32,10 @@ November 28th 2013
 -I added more layers to the world to start building on mining. I also began adding a system for saving the game, and I 
 -also finally figured out how the inventory system will work.
 November 29th 2013
+-I added the ability to move multiple blocks to the movement system. It didn't take that long but fixing bugs took a little
+-while. I also started a GFoB subreddit so the WIKI will be hosted there. If you have any bug reports then please message
+-my reddit account. That is going to be the best way to contact me. Also feel free to come to the subreddit and air any
+-criticsms you have of my game, just be warned that if you say it is the lack of visuals you won't get much of a response.
+November 29th 2013
 -I added a fully fledged mining system with two resources, coal and iron. Tomorrow I will be adding either a building
 -system or finished off the save system.
