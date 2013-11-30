@@ -31,3 +31,6 @@ November 27th 2013
 November 28th 2013
 -I added more layers to the world to start building on mining. I also began adding a system for saving the game, and I 
 -also finally figured out how the inventory system will work.
+November 29th 2013
+-I added a fully fledged mining system with two resources, coal and iron. Tomorrow I will be adding either a building
+-system or finished off the save system.
