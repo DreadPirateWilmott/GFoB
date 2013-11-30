@@ -4,12 +4,14 @@
 #on the top of the program.
 
 
-#Current Version 0.0.3 - 5 hours 0 minutes of recorded time
+#Current Version 0.0.3 - 6 hours 45 minutes of recorded time
 
 #import essential files
 import time
 import random
 import math
+import glob
+import os
 
 def genW():
 	print "Generating world..."
@@ -53,6 +55,23 @@ def Tutorial():
 	
 def GFoB(cMenu):
 	if cMenu == "start":
+		files = glob.glob("*.txt")
+		searchI = "natterrain.txt"
+		if searchI in files:
+			os.remove(searchI)
+		searchI = "unatterrain.txt"
+		if searchI in files:
+			os.remove(searchI)
+		searchI = "boundaries.txt"
+		if searchI in files:
+			os.remove(searchI)
+		searchI = "playersave.txt"
+		if searchI in files:
+			os.remove(searchI)
+		searchI = "inventory.txt"
+		if searchI in files:
+			os.remove(searchI)
+		#end if
 		charN = str(raw_input("Enter character name: "))
 		playerX = 1
 		playerZ = 1
@@ -69,8 +88,63 @@ def GFoB(cMenu):
 		blockList = blockList + generation
 		naturalBcks = naturalBcks + generation
 	elif cMenu == "load":
-		#Load game
-		print "WIP"
+		emptyList = []
+		#Load the game from the save state files
+		
+		#Load the player save
+		file = open("playersave.txt", "r")
+		tempCompile = file.read()
+		playerSplit = tempCompile.split(".")
+		
+		#Get the X, Y, Z, and direction
+		playerX = int(playerSplit[0])
+		playerY = int(playerSplit[1])
+		playerZ = int(playerSplit[2])
+		faceDir = int(playerSplit[3])
+		charN = str(playerSplit[4])
+		file.close()
+		
+		#Load the inventory
+		file = open("inventory.txt", "r")
+		inventory = file.read()
+		
+		#Get the players inventory
+		inventory = inventory.split(", ")
+		file.close()
+		
+		#Load the natural blocks
+		file = open("natterrain.txt", "r")
+		natterrain = file.read()
+		
+		#Get the natural terrain blocks
+		naturalBcks = natterrain.split(", ")
+		file.close()
+		
+		#Load the blockList
+		file = open("unatterrain.txt", "r")
+		unatterrain = file.read()
+		
+		#Get the blockList
+		blockList = unatterrain.split(", ")
+		file.close()
+		
+		#Load the fortress boundaries if the file exists
+		files = glob.glob("*.txt")
+		searchI = "boundaries.txt"
+		if searchI in files:
+			file = open("boundaries.txt", "r")
+			tempCompile = file.read()
+			tempCompile = tempCompile.split(".")
+			
+			#Load the files from temp compile
+			forXplusBound = int(tempCompile[0])
+			forXminusBound = int(tempCompile[1])
+			forZplusBound = int(tempCompile[2])
+			forXminusBound = int(tempCompile[3])
+		
+			emptyList.append("true")
+		#end if
+	#end if
 	while True: #Loop forever, there will be a command to end the game
 		#Moving down will be done automatically by the game
 		tempX = playerX + 1
@@ -614,8 +688,62 @@ def GFoB(cMenu):
 					print "You don't have enough resources." 
 				#end if
 			
-		elif instruction == "end.game":
-			return
+		elif instruction == "save game":
+			#Save the game
+			#Need to save X, Y, Z, and facing direction
+			#Need to save inventory, naturalBcks, and blockList lists
+			files = glob.glob("*.txt")
+			searchI = "natterrain.txt"
+			if searchI in files:
+				os.remove(searchI)
+			searchI = "unatterrain.txt"
+			if searchI in files:
+				os.remove(searchI)
+			searchI = "boundaries.txt"
+			if searchI in files:
+				os.remove(searchI)
+			searchI = "playersave.txt"
+			if searchI in files:
+				os.remove(searchI)
+			searchI = "inventory.txt"
+			if searchI in files:
+				os.remove(searchI)
+			#end if
+			
+			#Save the player position and info
+			file = open("playersave.txt", "w")
+			tempCompile = "%s.%s.%s.%s.%s" % (playerX, playerY, playerZ, faceDir, charN)
+			file.write(tempCompile)
+			file.close()
+			
+			#Save the inventory of the player
+			file = open("inventory.txt", "w")
+			inventory = ", ".join(inventory)
+			file.write(str(inventory))
+			file.close()
+			
+			#Save the natural blocks so the world knows when mining if you can get resources
+			file = open("natterrain.txt", "w")
+			natterrain = ", ".join(naturalBcks)
+			file.write(str(natterrain))
+			file.close()
+			
+			#Save the blockList so when loading the world the structures are saved
+			file = open("unatterrain.txt", "w")
+			unatterrain = ", ".join(blockList)
+			file.write(str(unatterrain))
+			file.close()
+			
+			#Save the fortress boundaries
+			if len(emptyList) == 1:
+				file = open("boundary.txt", "w")
+				tempCompile = "%s.%s.%s.%s" % (forXplusBound, forXminusBound, forZplusBound, forZminusBound)
+				file.write(tempCompile)
+				file.close()
+			#end if
+			#Close the game
+			import sys
+			sys.exit()
 		
 def NPC():
 	#This is the computer player in GFoB
