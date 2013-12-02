@@ -4,7 +4,7 @@
 #on the top of the program.
 
 
-#Current Version 0.0.3 - 8 hours 15 minutes of recorded time
+#Current Version 0.0.3 - 8 hours 25 minutes of recorded time
 
 #import essential files
 import time

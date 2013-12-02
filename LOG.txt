@@ -39,3 +39,5 @@ November 29th 2013
 November 29th 2013
 -I added a fully fledged mining system with two resources, coal and iron. Tomorrow I will be adding either a building
 -system or finished off the save system.
+December 1 2013
+-I added some command shorthand so that you can get commands happening quicker
