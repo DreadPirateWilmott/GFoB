@@ -253,7 +253,7 @@ def GFoB(cMenu):
 			#end if
 		#end if
 		instruction = str(raw_input(": ").lower())
-		if "move" in instruction: #Ex move forward
+		if "move" in instruction or "mv" in instruction: #Ex move forward
 			#The player wishes to move in one of the four directions
 			moveList = instruction.split(" ")
 			moveDirection = moveList[1]
@@ -269,7 +269,7 @@ def GFoB(cMenu):
 			#The move direction will determine which way the player moves; the direction is relative to the direction
 			#that the player is facing.
 			for i in range(0, moveDistance):
-				if moveDirection == "forward": 
+				if moveDirection == "forward" or moveDirection == "f": 
 					if faceDir == 1:
 						playerX += 1
 						compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
@@ -294,7 +294,7 @@ def GFoB(cMenu):
 						if compiledCo in blockList:
 							playerZ += moveDistance
 							print "Blocked path"
-				elif moveDirection == "back":
+				elif moveDirection == "back" or moveDirection == "b":
 					if faceDir == 1:
 						playerX -= 1
 						compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
@@ -319,7 +319,7 @@ def GFoB(cMenu):
 						if compiledCo in blockList:
 							playerZ -= 1
 							print "Blocked path"
-				elif moveDirection == "right":
+				elif moveDirection == "right" or moveDirection == "r":
 					if faceDir == 1:
 						playerZ += 1
 						compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
@@ -344,7 +344,7 @@ def GFoB(cMenu):
 						if compiledCo in blockList:
 							playerX -= 1
 							print "Blocked path"
-				elif moveDirection == "left":
+				elif moveDirection == "left" or moveDirection == "l":
 					if faceDir == 1:
 						playerZ -= 1
 						compiledCo = "%s.%s.%s" % (playerX, playerY, playerZ)
@@ -369,7 +369,7 @@ def GFoB(cMenu):
 						if compiledCo in blockList:
 							playerX += 1
 							print "Blocked path"
-				elif moveDirection == "climb": #To move upwards the block you wish to climb needs to be in front of you
+				elif moveDirection == "c": #To move upwards the block you wish to climb needs to be in front of you
 					if faceDir == 1:
 						tempX = playerX + 1 #This is a temporary, unimportant value that is used for testing location conditions
 						tempCompile = "%s.%s.%s" % (tempX, playerY, playerZ)
@@ -393,7 +393,7 @@ def GFoB(cMenu):
 						print "Blocked path"
 					#end if
 				#end for
-				elif moveDirection == "down":
+				elif moveDirection == "d":
 					tempY = playerY - 1
 					tempCompile = "%s.%s.%s" % (playerX, playerY, playerZ)
 					if tempCompile not in blockList: 
@@ -415,21 +415,21 @@ def GFoB(cMenu):
 				faceDir = 1
 			#end if
 		#end if
-		elif "turn" in instruction: #Ex turn.right
+		elif "turn" in instruction or "trn" in instruction: #Ex turn.right
 			#The player wishes to turn in one of the two directions
 			#1 = X+, 2 = Z+, 3 = X-, 4 = Z-
 			directionList = instruction.split(" ")
 			direction = directionList[1]
-			if direction == "right":
+			if direction == "right" or direction == "r":
 				faceDir += 1
 				if faceDir == 5:
 					faceDir = 1
-			elif direction == "left":
+			elif direction == "left" or direction == "l":
 				faceDir -= 1
 				if faceDir == 0:
 					faceDir = 4
 		#end if
-		elif "place" in instruction: #Ex place.forward
+		elif "place" in instruction or "plc" in instruction: #Ex place.forward
 			#The player wishes to place an object in one of the four directions
 			placeList = instruction.split(" ")
 			direction = placeList[1]
@@ -456,7 +456,7 @@ def GFoB(cMenu):
 				placeDis = 4
 				print "Distance too great, block will be placed 4 blocks away."
 				
-			if direction == "forward":
+			if direction == "forward" or direction == "f":
 				if faceDir == 1:
 					blockX = playerX + placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
@@ -469,7 +469,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
-			elif direction == "back":
+			elif direction == "back" or direction == "b":
 				if faceDir == 1:
 					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
@@ -482,7 +482,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
-			elif direction == "left":
+			elif direction == "left" or direction == "l":
 				if faceDir == 1:
 					blockZ = playerZ - placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
@@ -495,7 +495,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockX = playerX - placeDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
-			elif direction == "right":
+			elif direction == "right" or direction == "r":
 				if faceDir == 1:
 					blockZ = playerZ + placeDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
@@ -511,7 +511,7 @@ def GFoB(cMenu):
 			elif direction == "up":
 				blockY = playerY + placeDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
-			elif direction == "down" and playerY > 1:
+			elif direction == "down" or direction == "dwn" and playerY > 1:
 				blockY = playerY - placeDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
 			#end if
@@ -525,7 +525,7 @@ def GFoB(cMenu):
 				else:
 					print "Block already in that location"
 		#end if
-		elif "mine" in instruction:
+		elif "mine" in instruction or "mn" in instruction:
 			mineList = instruction.split(" ")
 			direction = mineList[1]
 			if len(mineList) == 3:
@@ -538,7 +538,7 @@ def GFoB(cMenu):
 				print "Too far away, block will be mined 4 blocks away."
 				
 			#Determine the direction and facing direction in an attempt to remove the block
-			if direction == "forward":
+			if direction == "forward" or direction == "f":
 				if faceDir == 1:
 					blockX = playerX + mineDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
@@ -551,7 +551,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockZ = playerZ - mineDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
-			elif direction == "back":
+			elif direction == "back" or direction == "b":
 				if faceDir == 1:
 					blockX = playerX - mineDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
@@ -564,7 +564,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockZ = playerZ + mineDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
-			elif direction == "left":
+			elif direction == "left" or direction == "l":
 				if faceDir == 1:
 					blockZ = playerZ - mineDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
@@ -577,7 +577,7 @@ def GFoB(cMenu):
 				elif faceDir == 4:
 					blockX = playerX - mineDis
 					compiledBlock = "%s.%s.%s" % (blockX, playerY, playerZ)
-			elif direction == "right":
+			elif direction == "right" or direction == "r":
 				if faceDir == 1:
 					blockZ = playerZ + mineDis
 					compiledBlock = "%s.%s.%s" % (playerX, playerY, blockZ)
@@ -593,7 +593,7 @@ def GFoB(cMenu):
 			elif direction == "up":
 				blockY = playerY + mineDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
-			elif direction == "down" and playerY > 1:
+			elif direction == "down" or direction == "dwn" and playerY > 1:
 				blockY = playerY - mineDis
 				compiledBlock = "%s.%s.%s" % (playerX, blockY, playerZ)
 			#end if
