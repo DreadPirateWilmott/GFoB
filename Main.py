@@ -745,8 +745,4 @@ def GFoB(cMenu):
 			import sys
 			sys.exit()
 		
-def NPC():
-	#This is the computer player in GFoB
-	print "Not functional"
-
 Menu()
