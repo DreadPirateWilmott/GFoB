@@ -15,47 +15,6 @@ Alot of the movement functionality has been added though the AI has not been add
 turn and climb. The climbing ability to is activated if there is a block infront of you, and you will not fall as long as long
 as their is a block forward and down one block, or below you.
 
-Commands
-========
-Primary command = move
-
-Seconday commands = .forward
-                  = .back
-                  = .left
-                  = .right
-                  
-++++++++++++++++++++++++    
-Primary command = place
-
-Secondary commands = .forward
-                   = .back
-                   = .left
-                   = .right
-				   = .up
-				   = .down
-				   
-Tertiary command = .(distance), this can be up to four blocks
-
-++++++++++++++++++++++++
-Primary command = turn
-
-Secondary command = .right
-                  = .left
-
-++++++++++++++++++++++++
-Primary command = dig
-
-Secondary command = .forward
-							= .back
-							= .right
-							= .left
-							= .up
-							= .down
-							
-Tertiary command = .(distance), this can be up to four blocks
-
-++++++++++++++++++++++++
-Primary command = shoot
-
-#There are no secondary commands, the command makes you shoot forward, where you aim depends on the direction
-#you are facing.
+New as of 12/3/2013
+===================
+You can now place, move, shoot, mine, and smelt. You can get iron from mining. Future updates will include things like farming, visuals (probably only ASCII), and a better system for alerting you to what's happening around you. The game might function in a 2d visual style, displaying a 3d world using tiles.
