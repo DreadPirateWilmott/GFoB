@@ -3,7 +3,7 @@
 #Feel free to change, break, create, or mod anything about this game as you see fit
 
 
-#Current Version 0.0.4 - 11 hours 19 minutes of recorded time
+#Current Version 0.0.4 - 11 hours 24 minutes of recorded time
 
 #import essential files
 import time
@@ -41,7 +41,9 @@ def Embark(): #This lets you name your goblins and your fortress as well as prep
 		print name
 		nList.append(name)
 	os.chdir(path)
-	return nList
+	
+	fortressName = str(raw_input("Fortress name: "))
+	return nList, fortressName
 def genW():
 	XZboundary = int(raw_input("Enter how large you want your world to be: ")) + 1
 	print "Generating world..."
@@ -139,7 +141,7 @@ def GFoB(cMenu):
 		
 		#Temporarily change directories to naming
 		os.chdir(path)
-		nList = Embark() #Name list holds all of the goblin's names
+		nList, fortressName = Embark() #Name list holds all of the goblin's names
 		os.chdir(newpath)
 		#Adding to blocklist
 		generation, names, XZboundary = genW()
@@ -200,10 +202,13 @@ def GFoB(cMenu):
 		
 		#Get the name list
 		nList = names.split(", ")
+		fortressName = nList[5]
+		nList.pop(5)
 		file.close()
 		
 	#end if
 	while True: #Loop forever, there will be a command to end the game
+		print fortressName
 		#Moving down will be done automatically by the game
 		tempX = playerX + 1
 		tempY = playerY - 1
@@ -822,6 +827,7 @@ def GFoB(cMenu):
 			
 			#Save the goblin names
 			file = open("names.txt", "w")
+			nList.append(fortressName)
 			names = ", ".join(nList)
 			file.write(str(names))
 			file.close()
