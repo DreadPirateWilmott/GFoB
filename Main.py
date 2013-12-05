@@ -1,10 +1,9 @@
 #Created by DreadPirateWilmott on November 14th 2013
-#Last edited on the 30th
-#Feel free to make edits and make this program your own, I only ask that you keep the DreadPirateWilmott name
-#on the top of the program.
+#Last edited on the 4th of December
+#Feel free to change, break, create, or mod anything about this game as you see fit
 
 
-#Current Version 0.0.3 - 8 hours 25 minutes of recorded time
+#Current Version 0.0.4 - 9 hours 35 minutes of recorded time
 
 #import essential files
 import time
@@ -154,6 +153,14 @@ def GFoB(cMenu):
 		tileList = unatterrain.split(", ")
 		file.close()
 		
+		#Get the tile names
+		file = open("existingtiles.txt", "r")
+		tiles = file.read()
+		
+		#Get the tile name list
+		tileNlist = tiles.split(", ")
+		file.close()
+		
 		#Load the fortress boundaries if the file exists
 		files = glob.glob("*.txt")
 		searchI = "boundaries.txt"
@@ -172,6 +179,7 @@ def GFoB(cMenu):
 		#end if
 	#end if
 	while True: #Loop forever, there will be a command to end the game
+		print inventory
 		#Moving down will be done automatically by the game
 		tempX = playerX + 1
 		tempY = playerY - 1
@@ -277,6 +285,11 @@ def GFoB(cMenu):
 			if tempCompile in tileList:
 				print "Tile left"
 			#end if
+		#end if
+		tempY = playerY - 1
+		tempCompile = "%s.%s.%s" % (playerX, tempY, playerZ)
+		if tempCompile in tileList:
+			print "No block below"
 		#end if
 		instruction = str(raw_input(": ").lower())
 		if "move" in instruction or "mv" in instruction: #Ex move forward
@@ -554,11 +567,15 @@ def GFoB(cMenu):
 			if emptyListTrig == True:
 				emptyList.append("true")
 			else:
-				if compiledTile not in tileList and tileType != "":
-					tileNlist.append(tileType)
-					tileList.append(compiledTile)
+				possibleTiles = ["stone", "dirt"] #MOD NOTICE - Any blocks created have to be added here
+				if tileType not in possibleTiles or tileType not in inventory:
+					print "Not a valid tile / Not available in inventory"
 				else:
-					print "Tile already in that location / Invalid block type"
+					if compiledTile not in tileList:
+						tileNlist.append(tileType)
+						tileList.append(compiledTile)
+					else:
+						print "Tile already in that location"
 		#end if
 		elif "mine" in instruction or "mn" in instruction:
 			mineList = instruction.split(" ")
@@ -634,23 +651,37 @@ def GFoB(cMenu):
 			#end if
 			
 			if compiledTile in naturalTiles:
+				
 				rsrcLck = random.randint(1, 101)
 				if rsrcLck >= 1 and rsrcLck <= 25: #1 in 4 chance for coal
 					inventory.append("coal")
 					print "Mined 1 coal"
+					oreMined = True
 				elif rsrcLck > 25 and rsrcLck <= 45: #1 in 4 (about) chance for iron
 					inventory.append("ir_ore")
 					print "Mined 1 iron ore"
+					oreMined = True
+				else:
+					oreMined = False
 				#end if
 				naturalTiles.remove(compiledTile)
-			#Remove the block
+				#Remove the block
+			else:
+				oreMined = False
 			if compiledTile in tileList:
 				searchI = tileList.index(compiledTile)
 				removedItem = tileNlist[searchI]
 				tileNlist.pop(searchI)
 			
 				tileList.remove(compiledTile)
-				print "Tile mined: %s" % (removedItem)
+				
+				if oreMined == False:
+					print "Tile mined: %s" % (removedItem)
+					#Add the mined block to the inventory of the player
+					inventory.append(removedItem)
+				else:
+					print "Tile mined"
+				#end if
 			else:
 				print "No tile to mine"
 			#end if
@@ -747,6 +778,9 @@ def GFoB(cMenu):
 			searchI = "inventory.txt"
 			if searchI in files:
 				os.remove(searchI)
+			searchI = "existingtiles.txt"
+			if searchI in files: 
+				os.remove(searchI)
 			#end if
 			
 			#Save the player position and info
@@ -771,6 +805,12 @@ def GFoB(cMenu):
 			file = open("unatterrain.txt", "w")
 			unatterrain = ", ".join(tileList)
 			file.write(str(unatterrain))
+			file.close()
+			
+			#Save the tile names
+			file = open("existingtiles.txt", "w")
+			tiles = ", ".join(tileNlist)
+			file.write(str(tiles))
 			file.close()
 			
 			#Save the fortress boundaries

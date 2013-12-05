@@ -39,5 +39,9 @@ November 29th 2013
 November 29th 2013
 -I added a fully fledged mining system with two resources, coal and iron. Tomorrow I will be adding either a building
 -system or finished off the save system.
-December 1 2013
+December 1st 2013
 -I added some command shorthand so that you can get commands happening quicker
+December 4th 2013
+-Updates will be happening faster now that I have more time to work on this project. Today I integrated the inventory 
+-with the mining and placing abilities. I also changed the game so that it calls spaces tiles instead of blocks. Tomorrow
+-I will be working on the view function. This function will check the top Y layer and output an ASCII image of the landscape.
