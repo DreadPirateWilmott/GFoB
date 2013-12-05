@@ -16,12 +16,37 @@ import os
 def genW():
 	print "Generating world..."
 	tileList = []
+	tileNlist = []
 	for x in range(1, 21):
 		for z in range(1, 21):
 			for y in range(1, 21):
-				compile = "%s.%s.%s" % (x, y, z)
-				tileList.append(compile)
-	return tileList
+				if y < 18:
+					if y >= 16:
+						dirtChance = random.randint(1, 11)
+						if dirtChance == 1:
+							tileName = "dirt"
+						else:
+							tileName = "stone"
+					else:
+						tileName = "stone"
+				elif y >= 18:
+					airChance = random.randint(1,3)
+					if airChance == 1:
+						tileName = "air"
+					else:
+						tempY = y - 1
+						tempCompile = "%s.%s.%s" % (x, tempY, z)
+						if tempCompile not in tileList: #Air
+							tileName = "air"
+						else:
+							tileName = "dirt"
+					#end if
+					
+				if tileName != "air":
+					compile = "%s.%s.%s" % (x, y, z)
+					tileList.append(compile)
+					tileNlist.append(tileName)
+	return tileList, tileNlist
 	
 def Menu():
 	print "[Start] New Game"
@@ -82,11 +107,12 @@ def GFoB(cMenu):
 		tileList = [] #Format for blocklist is the X coordinate. Y coordinate. Z coordinate
 		inventory = [] #This is the inventory of the player
 		emptyList = [] #This list contains unimportant information
-		
+		tileNlist = [] #This list corresponds with tileList, all items in tileList have the same value in here, but they have the tile name
 		#Adding to blocklist
-		generation = genW()
+		generation, names = genW()
 		tileList = tileList + generation
 		naturalTiles = naturalTiles + generation
+		tileNlist = tileNlist + names
 	elif cMenu == "load":
 		emptyList = []
 		#Load the game from the save state files
@@ -433,6 +459,7 @@ def GFoB(cMenu):
 			#The player wishes to place an object in one of the four directions
 			placeList = instruction.split(" ")
 			direction = placeList[1]
+			tileType = "" #Default
 			
 			if direction == "crefor" and len(emptyList) == 0:
 				placeDis = 1
@@ -447,7 +474,14 @@ def GFoB(cMenu):
 			else:
 				emptyListTrig = False
 			if len(placeList) == 3:
+				try:
+					placeDis = int(placeList[2])
+				except ValueError: #Identifying block not distance
+					placeDis = 1
+					tileType = str(placeList[2])
+			elif len(placeList) == 4:
 				placeDis = int(placeList[2])
+				tileType = str(placeList[3])
 			else:
 				placeDis = 1
 				emptyListTrig = False
@@ -520,10 +554,11 @@ def GFoB(cMenu):
 			if emptyListTrig == True:
 				emptyList.append("true")
 			else:
-				if compiledTile not in tileList:
+				if compiledTile not in tileList and tileType != "":
+					tileNlist.append(tileType)
 					tileList.append(compiledTile)
 				else:
-					print "Tile already in that location"
+					print "Tile already in that location / Invalid block type"
 		#end if
 		elif "mine" in instruction or "mn" in instruction:
 			mineList = instruction.split(" ")
@@ -610,8 +645,12 @@ def GFoB(cMenu):
 				naturalTiles.remove(compiledTile)
 			#Remove the block
 			if compiledTile in tileList:
+				searchI = tileList.index(compiledTile)
+				removedItem = tileNlist[searchI]
+				tileNlist.pop(searchI)
+			
 				tileList.remove(compiledTile)
-				print "Tile mined"
+				print "Tile mined: %s" % (removedItem)
 			else:
 				print "No tile to mine"
 			#end if
