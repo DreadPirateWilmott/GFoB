@@ -3,7 +3,7 @@
 #Feel free to change, break, create, or mod anything about this game as you see fit
 
 
-#Current Version 0.0.4 - 13 hours 34 minutes of recorded time
+#Current Version 0.0.4 - 5 hours of recorded time (since change)
 
 #import essential files
 import history
