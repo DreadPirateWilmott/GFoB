@@ -36,6 +36,7 @@ def Bees(tileList, tileNlist):
 	
 	removedBlocks = []
 	if beeArea >= 9 and Xdisplaced > 1 and Ydisplaced > 1:
+		print "That is a valid space for beekeeping."
 		for x in range(0, Xdisplaced):
 			for y in range(0, Ydisplaced):
 				compile = "%s.%s.%s" % (x, zLevel, y)

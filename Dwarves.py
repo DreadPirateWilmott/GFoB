@@ -3,7 +3,7 @@
 #Feel free to change, break, create, or mod anything about this game as you see fit
 
 
-#Current Version 0.0.4 - 6 hours 10 minutes of recorded time (since 0.0.3)
+#Current Version 0.0.4 - 7 hours 25 minutes of recorded time (since 0.0.3)
 
 #import essential files
 import beekeeping
@@ -64,11 +64,11 @@ def Main(cMenu): #This is the function call
 	nList, fortressName, location = Embark()
 	tileList, tileNlist = beekeeping.Bees(tileList, tileNlist)
 	if cMenu == "start":
-		print "Your goblin caravan arrives in the fields of %s" % (location)
+		print "Your dwarf caravan arrives in the fields of %s" % (location)
 		
 		#Get a name list variable from the names of your goblins
 		names = ", ".join(nList)
-		print "Your party of goblins consists of %s" % (names)
+		print "Your party of dwarves consists of %s" % (names)
 		
 		pause = raw_input("PAUSE")
 	#end if
