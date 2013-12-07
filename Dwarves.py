@@ -6,6 +6,7 @@
 #Current Version 0.0.4 - 6 hours 10 minutes of recorded time (since 0.0.3)
 
 #import essential files
+import beekeeping
 import generate
 import random
 import glob
@@ -61,6 +62,7 @@ def Menu():
 def Main(cMenu): #This is the function call
 	tileList, tileNlist = generate.genW() #Tiles, tile names, world size
 	nList, fortressName, location = Embark()
+	tileList, tileNlist = beekeeping.Bees(tileList, tileNlist)
 	if cMenu == "start":
 		print "Your goblin caravan arrives in the fields of %s" % (location)
 		
