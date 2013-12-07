@@ -1,54 +1,20 @@
 #Created by DreadPirateWilmott on November 14th 2013
-#Last edited on the 4th of December
-#Feel free to change, break, create, or mod anything about this game as you see fit
 
 
-#Current Version 0.0.4 - 7 hours 25 minutes of recorded time (since 0.0.3)
+#Current Version 0.0.4 - 8 hours 35 minutes of recorded time (since 0.0.3)
 
-#import essential files
+#import python files
+import dwarf_manager
 import beekeeping
 import generate
+import embark
+
+#import built-in functiona
 import random
 import glob
 import os
 
-def Embark(): #This lets you name your goblins and your fortress as well as prepare for the journey ahead
-	path = os.getcwd()
-	newpath = path + "\\naming"
-	os.chdir(newpath)
-	
-	#Get the first name list
-	file = open("first.txt", "r")
-	fNames = file.read()
-	fNames = fNames.split("\n")
-	file.close()
-	
-	#Get the last name list
-	file = open("last.txt", "r")
-	lNames = file.read()
-	lNames = lNames.split("\n")
-	file.close()
-	
-	file = open("locations.txt", "r")
-	locations = file.read()
-	locations = locations.split("\n")
-	randLoc = random.randint(0, 15)
-	location = locations[randLoc]
-	
-	os.chdir(path)
-	#Loop 5 times to get each goblin a name
-	nList = []
-	for i in range(1, 6): #5 times
-		first = random.randint(1, len(fNames)) - 1
-		last = random.randint(1, len(lNames)) - 1
-		
-		fName = fNames[first]
-		lName = lNames[last]
-		name = "%s %s" % (fName, lName)
-		nList.append(name)
-	#end for
-	fortressName = str(raw_input("Fortress name: "))
-	return nList, fortressName, location
+
 
 def Menu():
 	print "[Start] New Game"
@@ -61,7 +27,7 @@ def Menu():
 	
 def Main(cMenu): #This is the function call
 	tileList, tileNlist = generate.genW() #Tiles, tile names, world size
-	nList, fortressName, location = Embark()
+	nList, fortressName, location, inventory = embark.prepare()
 	tileList, tileNlist = beekeeping.Bees(tileList, tileNlist)
 	if cMenu == "start":
 		print "Your dwarf caravan arrives in the fields of %s" % (location)
@@ -69,7 +35,17 @@ def Main(cMenu): #This is the function call
 		#Get a name list variable from the names of your goblins
 		names = ", ".join(nList)
 		print "Your party of dwarves consists of %s" % (names)
-		
-		pause = raw_input("PAUSE")
+	elif cMenu == "load":
+		print "Hasn't been worked on yet"
 	#end if
+	
+	instMenu = "Instruction Menu\n================\nManage Dwarves\nCrafting\nNature\nMining\nBuilding\nMenu"
+	print instMenu
+	while True:
+		run = str(raw_input(">").lower()) #run is the main game command
+		
+		if run == "menu":
+			print instMenu
+		#end if
+	#end while
 Menu()
