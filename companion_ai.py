@@ -9,7 +9,7 @@ import os
 
 def priority():
 	path = os.getcwd()
-	newpath = path + "\\dwarves"
+	newpath = path + "\\essentials"
 	
 	os.chdir(newpath)
 	

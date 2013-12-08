@@ -27,7 +27,7 @@ def prepare(): #This lets you name get the names of your dwarves and name the fo
 	
 	os.chdir(path)
 	
-	#Loop 5 times to get each goblin a name
+	#Loop 5 times to get each dwarf a name
 	nList = []
 	for i in range(1, 6): #5 times
 		first = random.randint(1, len(fNames)) - 1
