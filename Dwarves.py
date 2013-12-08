@@ -13,6 +13,7 @@ import embark
 import random
 import glob
 import os
+import sys
 
 
 
@@ -39,13 +40,16 @@ def Main(cMenu): #This is the function call
 		print "Hasn't been worked on yet"
 	#end if
 	
-	instMenu = "Instruction Menu\n================\nManage Dwarves\nCrafting\nNature\nMining\nBuilding\nMenu"
+	instMenu = "Instruction Menu\n================\nManage Dwarves\nCrafting\nNature\nMining\nBuilding\nMenu\nExit"
 	print instMenu
 	while True:
 		run = str(raw_input(">").lower()) #run is the main game command
 		
 		if run == "menu":
 			print instMenu
+		#end if
+		if run == "exit":
+			sys.exit(0)
 		#end if
 	#end while
 Menu()
