@@ -4,7 +4,11 @@ import random
 
 def createFiles(nList):
 	path = os.getcwd()
-	newpath = path + "\\dwarves"
+	d = path + "/dwarves"
+	if not os.path.exists(d): #If dwarves does not exsist create it
+		os.makedirs(d)
+	#end if
+	newpath = path + "/dwarves"
 	os.chdir(newpath)
 	
 	
@@ -44,7 +48,6 @@ def createFiles(nList):
 		
 		file.close()
 	#end for
-	
 	os.chdir(path)
 def Manage():
 	#Manage the dwarves

@@ -2,34 +2,45 @@ def Bees(tileList, tileNlist):
 	
 	zLevel = int(raw_input("Z level: "))
 	
-	startingPoint = str(raw_input("Starting position: "))
-	startingPoints = startingPoint.split(".") #X.Y
 	
-	startingX = int(startingPoints[0])
-	startingY = int(startingPoints[1])
+	#Get the difference in position
+	Xdisplaced = None
+	Ydisplaced = None
+	t = False
+
+	while Xdisplaced is None or Ydisplaced is None:
+		if t == False:
+			startingPoint = str(raw_input("Starting Position: "))
+		else:
+			startingPoint = str(raw_input("Invalid Starting Pos, Enter new Starting Position: "))
+		#end if
+		startingPoints = startingPoint.split(".") #X.Y
 	
-	endingPoint = str(raw_input("Ending position: "))
-	endingPoints = endingPoint.split(".") #X.Y
+		startingX = int(startingPoints[0])
+		startingY = int(startingPoints[1])
+		if t == False:
+			endingPoint = str(raw_input("Ending pPsition: "))
+			t = True
+		else:
+			endingPoint = str(raw_input("Invalid Ending Pos, Enter new Ending Position: "))
+		#end if
+		endingPoints = endingPoint.split(".") #X.Y
 	
-	endingX = int(endingPoints[0])
-	endingY = int(endingPoints[1])
-	
-	if endingX > startingX:
-		Xdisplaced = endingX - startingX + 1
-	elif endingX < startingX:
-		Xdisplaced = startingX - endingX + 1
-	else:
-		Xdisplaced = 1
-	#end if
-	
-	if endingY > startingY:
-		Ydisplaced = endingY - startingY + 1
-	elif endingY < startingY:
-		Ydisplaced = startingY - endingY + 1
-	else:
-		Ydisplaced = 1
-	#end if
-	
+		endingX = int(endingPoints[0])
+		endingY = int(endingPoints[1])
+
+		if endingX > startingX:
+			Xdisplaced = endingX - startingX
+		elif endingX < startingX:
+			Xdisplaced = startingX - endingX
+		#end if
+
+		if endingY > startingY:
+			Ydisplaced = endingY - startingY
+		elif endingY < startingY:
+			Ydisplaced = startingY - endingY
+		#end if
+	#end while
 	#Testing
 	print Xdisplaced
 	print Ydisplaced

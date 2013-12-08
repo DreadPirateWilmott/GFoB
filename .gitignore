@@ -1,0 +1,6 @@
+#GitEye
+/.project
+
+#Python
+/.pyc
+/.py~

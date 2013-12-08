@@ -16,6 +16,7 @@ import companion_ai
 import random
 import glob
 import os
+import sys
 
 
 
@@ -42,7 +43,7 @@ def Main(cMenu): #This is the function call
 		print "Hasn't been worked on yet"
 	#end if
 	
-	instMenu = "\nInstruction Menu\n================\nManage Dwarves\nCrafting\nJobs\nZoning\nMenu"
+	instMenu = "\nInstruction Menu\n================\nManage Dwarves\nCrafting\nJobs\nZoning\nMenu\nExit"
 	print instMenu
 	while True:
 		run = str(raw_input(">").lower()) #run is the main game command
@@ -50,6 +51,7 @@ def Main(cMenu): #This is the function call
 		if run == "menu":
 			print instMenu
 		#end if
+
 		
 		elif run == "manage dwarves":
 			dwarf_manager.Manage()
@@ -67,6 +69,10 @@ def Main(cMenu): #This is the function call
 			print "WORK IN PROGRESS"
 		#end if
 		
+		elif run == "exit":
+			sys.exit(0)
+		#end if
+
 		companion_ai.priority()
 	#end while
 Menu()
