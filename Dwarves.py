@@ -9,6 +9,9 @@ import beekeeping
 import generate
 import embark
 
+#import AI
+import companion_ai
+
 #import built-in functiona
 import random
 import glob
@@ -31,16 +34,16 @@ def Main(cMenu): #This is the function call
 	nList, fortressName, location, inventory = embark.prepare()
 	tileList, tileNlist = beekeeping.Bees(tileList, tileNlist)
 	if cMenu == "start":
-		print "Your dwarf caravan arrives in the fields of %s" % (location)
+		print "Your dwarf caravan arrives in the fields of %s." % (location)
 		
 		#Get a name list variable from the names of your goblins
 		names = ", ".join(nList)
-		print "Your party of dwarves consists of %s" % (names)
+		print "Your party of dwarves consists of %s." % (names)
 	elif cMenu == "load":
 		print "Hasn't been worked on yet"
 	#end if
 	
-	instMenu = "Instruction Menu\n================\nManage Dwarves\nCrafting\nNature\nMining\nBuilding\nMenu\nExit"
+	instMenu = "\nInstruction Menu\n================\nManage Dwarves\nCrafting\nJobs\nZoning\nMenu\nExit"
 	print instMenu
 	while True:
 		run = str(raw_input(">").lower()) #run is the main game command
@@ -48,8 +51,28 @@ def Main(cMenu): #This is the function call
 		if run == "menu":
 			print instMenu
 		#end if
-		if run == "exit":
+
+		
+		elif run == "manage dwarves":
+			dwarf_manager.Manage()
+		#end if
+		
+		elif run == "crafting":
+			print "WORK IN PROGRESS"
+		#end if
+		
+		elif run == "jobs":
+			print "WORK IN PROGRESS"
+		#end if
+		
+		elif run == "zoning":
+			print "WORK IN PROGRESS"
+		#end if
+		
+		elif run == "exit":
 			sys.exit(0)
 		#end if
+
+		companion_ai.priority()
 	#end while
 Menu()

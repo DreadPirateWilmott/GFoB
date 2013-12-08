@@ -28,21 +28,22 @@ def Bees(tileList, tileNlist):
 	
 		endingX = int(endingPoints[0])
 		endingY = int(endingPoints[1])
-	
+
 		if endingX > startingX:
 			Xdisplaced = endingX - startingX
 		elif endingX < startingX:
 			Xdisplaced = startingX - endingX
 		#end if
-	
+
 		if endingY > startingY:
 			Ydisplaced = endingY - startingY
 		elif endingY < startingY:
 			Ydisplaced = startingY - endingY
 		#end if
 	#end while
-	if Xdisplaced is None:
-		print "Dang"
+	#Testing
+	print Xdisplaced
+	print Ydisplaced
 	beeArea = Xdisplaced * Ydisplaced
 	print beeArea
 	
@@ -65,6 +66,8 @@ def Bees(tileList, tileNlist):
 				#end if
 			#end for
 		#end for
+	else:
+		print "That is not a valid space for beekeeping."
 	#end if
 	
 	return tileList, tileNlist
