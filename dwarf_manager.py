@@ -4,7 +4,7 @@ import random
 
 def createFiles(nList):
 	path = os.getcwd()
-	newpath = path + "\\dwarves"
+	newpath = path + "/dwarves"
 	os.chdir(newpath)
 	
 	
