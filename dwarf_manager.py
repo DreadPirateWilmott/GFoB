@@ -4,7 +4,7 @@ import random
 
 def createFiles(nList):
 	path = os.getcwd()
-	newpath = path + "/dwarves"
+	newpath = path + "\\dwarves"
 	os.chdir(newpath)
 	
 	
@@ -16,6 +16,19 @@ def createFiles(nList):
 		tempI = i - 1
 		name = str(nList[tempI])
 		historyOfMentalIllness = random.randint(1, 8) #1 in 8 chance that they have mental illness in the family
+		
+		#Possible base emotions = angry, grumpy, sad, happy
+		baseEmotion = random.randint(0, 15)
+		if baseEmotion >= 0 and baseEmotion <= 1:
+			baseEmotion = "angry"
+		elif baseEmotion >= 2 and baseEmotion <= 3:
+			baseEmotion = "grumpy"
+		elif baseEmotion >= 3 and baseEmotion <= 4:
+			baseEmotion = "sad"
+		else:
+			baseEmotion = "happy"
+		#end if
+		
 		if historyOfMentalIllness == 1:
 			historyOfMentalIllness = True
 		else:
@@ -25,9 +38,14 @@ def createFiles(nList):
 		
 		file.write(name + "\n")
 		file.write(str(historyOfMentalIllness) + "\n")
-		
+		file.write(baseEmotion + "\n")
 		entities = ", ".join(ownedEntities)
 		file.write(entities)
 		
 		file.close()
 	#end for
+	
+	os.chdir(path)
+def Manage():
+	#Manage the dwarves
+	print "WIP"

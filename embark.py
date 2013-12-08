@@ -4,7 +4,7 @@ import random
 
 def prepare(): #This lets you name get the names of your dwarves and name the fortress
 	path = os.getcwd()
-	newpath = path + "/naming"
+	newpath = path + "\\naming"
 	os.chdir(newpath)
 	
 	#Get the first name list

@@ -9,16 +9,16 @@ import os
 
 def priority():
 	path = os.getcwd()
-	newpath = path + "/dwarves"
+	newpath = path + "\\dwarves"
 	
 	os.chdir(newpath)
 	
 	files = glob.glob("*.txt")
-	numOfLoops = files - 1
+	numOfLoops = len(files) - 1
 	
-	for i in range(0, loops):
+	for i in range(0, numOfLoops):
 		tempI = i + 1
-		file = open("dwarf%s" % (tempI), "r")
+		file = open("dwarf%s.txt" % (tempI), "r")
 		fileContents = file.read()
 		fileContents = fileContents.split("\n")
 		
@@ -40,7 +40,8 @@ def priority():
 			#end if
 		elif emotion == "angry":
 			priority = "tantrum"
-			if mentalIllness = True:
+			if mentalIllness == "True":
 				priority = "tantrum_x" #This is like tantrum but the dwarf can murder people
 	#end for
-	os.path(path)
+	os.chdir(path)
+	print priority
