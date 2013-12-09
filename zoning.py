@@ -85,27 +85,13 @@ def set(tileList): #The zone has to be free of tiles
 			if compile in tileList:
 				print "Zone obstructed."
 				return
-			else:
-				print "Zone created."
-				#end if
+			#end if
+		#end for
+		
+		print "Social zone created."
 				
 		zoneFiles = glob.glob("*.txt")
 		if "socialzone.txt" in zoneFiles:
-			print "Existing zone already in place."
-			file = open("socialzone.txt", "r")
-			existingZone = file.read()
-			existingZone = existingZone.split(", ")
-			limit = len(zonedArea)
-			print len(zonedArea)
-			print zonedArea
-			for i in range(0, limit):
-				print zonedArea[i]
-				if zonedArea[i] in existingZone:
-					zonedArea.pop(i)
-				#end if
-			#end for
-			file.close()
-			
 			file = open("socialzone.txt", "a")
 			zonedArea = ", ".join(zonedArea)
 			file.write(", %s" % (zonedArea))
