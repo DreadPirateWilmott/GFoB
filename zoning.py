@@ -95,8 +95,11 @@ def set(tileList): #The zone has to be free of tiles
 			file = open("socialzone.txt", "r")
 			existingZone = file.read()
 			existingZone = existingZone.split(", ")
-			limit = len(zonedArea) - 1
+			limit = len(zonedArea)
+			print len(zonedArea)
+			print zonedArea
 			for i in range(0, limit):
+				print zonedArea[i]
 				if zonedArea[i] in existingZone:
 					zonedArea.pop(i)
 				#end if
